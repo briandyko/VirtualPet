@@ -18,18 +18,38 @@ namespace VirtualPet
             gabby.Tiredness = 0;
             gabby.IsSick = false;
 
-            //Console.WriteLine(gabby.Name + " the Cat");
-
-            gabby.Feed();
-            gabby.Feed();
-            gabby.Drink();
-            gabby.Sleep();
-            gabby.Feed();
-            gabby.Play();
+            bool perpetualMenu = true;
 
             gabby.Tick();
+            Console.WriteLine();
 
-          
+            do
+            {
+                // User Menu
+
+                Console.WriteLine("Now that you are the proud owner of " + gabby.Name + " What do you want to do?");
+                Console.WriteLine("1. Feed Gabby");
+                Console.WriteLine("2. Give Gabby Water");
+                Console.WriteLine("3. Play with Gabby");
+                Console.WriteLine("4. Put Gabby to Sleep");
+                Console.WriteLine("5. Do Nothing");
+                Console.WriteLine("6. Exit");
+                int userChoice = int.Parse(Console.ReadLine());
+
+                if (userChoice == 6)
+                {
+                    perpetualMenu = false;    // to make do-while loop run
+                }
+
+               
+
+            }
+
+            while (perpetualMenu == true);  // ends do-while loop for program running until "exit"
+
         }
+
+
     }
-}
+    }
+

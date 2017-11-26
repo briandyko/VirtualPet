@@ -106,7 +106,7 @@ namespace VirtualPet
 
         public void GettingHungry()
         {
-            if (hunger > 50)
+            if (hunger > 30)
             {
                 Console.WriteLine(name + " is getting hungry, you better feed her!");
             }
@@ -117,7 +117,7 @@ namespace VirtualPet
 
         public void GettingThirsty()
         {
-            if (thirst > 50)
+            if (thirst > 30)
             {
                 Console.WriteLine(name + "is getting very thirsty, maybe give her some water.");
             }
@@ -133,7 +133,7 @@ namespace VirtualPet
 
         public void Sick()
         {
-            if (hunger < 8 || thirst < 8 || tiredness > 22)
+            if (hunger > 32 || thirst > 32 || tiredness > 22)
             {
                 isSick = true;
                 if (isSick == true)
@@ -145,7 +145,7 @@ namespace VirtualPet
 
         public void Perish()
         {
-            if (hunger <= 0 || thirst <= 0 || tiredness >= 30)
+            if (hunger >= 40 || thirst >= 40 || tiredness >= 30)
             {
                 Console.WriteLine("Sadly, " + name + "has perished. You are not a very good pet owner.");
             }
