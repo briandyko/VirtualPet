@@ -10,29 +10,43 @@ namespace VirtualPet
     {
         //fields
 
-        private bool isHungry;
-        private bool isThirsty;
-        private bool isBored;
+        private string name;
+        private int hunger;
+        private int thirst;
+        private int boredom;
+        private int tiredness;
         private bool isSick;
 
         //Properties
 
-        public bool IsHungry
+        public string Name
         {
-            get { return this.isHungry; }
-            set { this.isHungry = value; }
+            get { return this.Name; }
+            set { this.Name = value; }
         }
 
-        public bool IsThirsty
+        public int Hunger
         {
-            get { return this.isThirsty; }
-            set { this.isThirsty = value; }
+            get { return this.Hunger; }
+            set { this.Hunger = value; }
         }
 
-        public bool IsBored
+        public int Thirst
         {
-            get { return this.isBored; }
-            set { this.isBored = value; }
+            get { return this.Thirst; }
+            set { this.Thirst = value; }
+        }
+
+        public int Boredom
+        {
+            get { return this.Boredom; }
+            set { this.Boredom = value; }
+        }
+
+        public int Tiredness
+        {
+            get { return this.Tiredness; }
+            set { this.Tiredness = value; }
         }
 
         public bool IsSick
@@ -50,22 +64,27 @@ namespace VirtualPet
 
         //Methods
 
-        public static void Tick()
+        public void Tick()
         {
 
         }
 
-        public static void Feed()
+        public void Feed()
         {
 
         }
 
-        public static void Drink()
+        public void Drink()
         {
 
         }
 
-        public static void Sleep()
+        public void Sleep()
+        {
+
+        }
+
+        public void Play()
         {
 
         }
