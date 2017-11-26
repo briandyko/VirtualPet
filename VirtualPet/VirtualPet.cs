@@ -21,32 +21,32 @@ namespace VirtualPet
 
         public string Name
         {
-            get { return this.Name; }
-            set { this.Name = value; }
+            get { return this.name; }
+            set { this.name = value; }
         }
 
         public int Hunger
         {
-            get { return this.Hunger; }
-            set { this.Hunger = value; }
+            get { return this.hunger; }
+            set { this.hunger = value; }
         }
 
         public int Thirst
         {
-            get { return this.Thirst; }
-            set { this.Thirst = value; }
+            get { return this.thirst; }
+            set { this.thirst = value; }
         }
 
         public int Boredom
         {
-            get { return this.Boredom; }
-            set { this.Boredom = value; }
+            get { return this.boredom; }
+            set { this.boredom = value; }
         }
 
         public int Tiredness
         {
-            get { return this.Tiredness; }
-            set { this.Tiredness = value; }
+            get { return this.tiredness; }
+            set { this.tiredness = value; }
         }
 
         public bool IsSick
@@ -66,27 +66,91 @@ namespace VirtualPet
 
         public void Tick()
         {
-
+            Console.WriteLine(name);
+            Console.WriteLine("Hunger: " + hunger);
+            Console.WriteLine("Thirst: " + thirst);
+            Console.WriteLine("Boredom: " + boredom);
+            Console.WriteLine("Tiredness: " + tiredness);
         }
 
         public void Feed()
         {
-
+            hunger -= 5;
         }
 
         public void Drink()
         {
-
+            thirst -= 5;
         }
 
         public void Sleep()
         {
-
+            tiredness -= 5;
+            if (tiredness < 0)
+            {
+                tiredness = 0;
+            }
         }
 
         public void Play()
         {
+            boredom -= 5;
+            hunger += 5;
+            thirst += 8;
+
+            if (boredom < 0)
+            {
+                boredom = 0;
+            }
+        }
+
+        public void GettingHungry()
+        {
+            if (hunger > 50)
+            {
+                Console.WriteLine(name + " is getting hungry, you better feed her!");
+            }
+            
+      
+
+        }
+
+        public void GettingThirsty()
+        {
+            if (thirst > 50)
+            {
+                Console.WriteLine(name + "is getting very thirsty, maybe give her some water.");
+            }
+        }
+
+        public void GettingTired()
+        {
+            if (tiredness > 20)
+            {
+                Console.WriteLine(name + "is looking tired, let her take a nap.");
+            }
+        }
+
+        public void Sick()
+        {
+            if (hunger < 8 || thirst < 8 || tiredness > 22)
+            {
+                isSick = true;
+                if (isSick == true)
+                {
+                    Console.WriteLine("Oh no! " + name + " is sick! You need to take better care of her.");
+                }
+            }
+        }
+
+        public void Perish()
+        {
+            if (hunger <= 0 || thirst <= 0 || tiredness >= 30)
+            {
+                Console.WriteLine("Sadly, " + name + "has perished. You are not a very good pet owner.");
+            }
 
         }
     }
+
 }
