@@ -11,6 +11,7 @@ namespace VirtualPet
         //fields
 
         private string name;
+        private int weight;
         private int hunger;
         private int thirst;
         private int boredom;
@@ -23,6 +24,12 @@ namespace VirtualPet
         {
             get { return this.name; }
             set { this.name = value; }
+        }
+
+        public int Weight
+        {
+            get { return this.weight; }
+            set { this.weight = value; }
         }
 
         public int Hunger
@@ -68,6 +75,7 @@ namespace VirtualPet
         {
             Console.WriteLine(name);
             Console.WriteLine("Hunger: " + hunger);
+            Console.WriteLine("Weight: " + weight);
             Console.WriteLine("Thirst: " + thirst);
             Console.WriteLine("Boredom: " + boredom);
             Console.WriteLine("Tiredness: " + tiredness);
@@ -76,6 +84,14 @@ namespace VirtualPet
         public void Feed()
         {
             hunger -= 5;
+        }
+
+        public void WeightGain()
+        {
+            if (hunger < 0 || boredom > 10 || tiredness < 0)
+            {
+                weight += 2;
+            }
         }
 
         public void Drink()
@@ -97,11 +113,13 @@ namespace VirtualPet
             boredom -= 5;
             hunger += 5;
             thirst += 8;
+            tiredness += 3;
 
-            if (boredom < 0)
+            if (weight > 20)
             {
-                boredom = 0;
+                weight--;
             }
+
         }
 
         public void GettingHungry()
@@ -111,8 +129,6 @@ namespace VirtualPet
                 Console.WriteLine(name + " is getting hungry, you better feed her!");
             }
             
-      
-
         }
 
         public void GettingThirsty()
@@ -129,6 +145,11 @@ namespace VirtualPet
             {
                 Console.WriteLine(name + "is looking tired, let her take a nap.");
             }
+        }
+
+        public void GettingBored()
+        {
+            boredom += 3;
         }
 
         public void Sick()

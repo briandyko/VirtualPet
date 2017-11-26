@@ -12,6 +12,7 @@ namespace VirtualPet
         {
             VirtualPet gabby = new VirtualPet();
             gabby.Name = "Gabby the Cat";
+            gabby.Weight = 15;
             gabby.Hunger = 25;
             gabby.Thirst = 25;
             gabby.Boredom = 0;
@@ -20,12 +21,14 @@ namespace VirtualPet
 
             bool perpetualMenu = true;
 
-            gabby.Tick();
-            Console.WriteLine();
+            
 
             do
             {
                 // User Menu
+
+                gabby.Tick();
+                Console.WriteLine();
 
                 Console.WriteLine("Now that you are the proud owner of " + gabby.Name + " What do you want to do?");
                 Console.WriteLine("1. Feed Gabby");
@@ -41,15 +44,41 @@ namespace VirtualPet
                     perpetualMenu = false;    // to make do-while loop run
                 }
 
-               
+                if(userChoice == 1)
+                {
+                    gabby.Feed();
+                    gabby.WeightGain();
+                }
+
+                else if(userChoice == 2)
+                {
+                    gabby.Drink();
+                }
+
+                else if (userChoice == 3)
+                {
+                    gabby.Play();
+                }
+
+                else if (userChoice == 4)
+                {
+                    gabby.Sleep();
+                }
+
+                else if (userChoice == 5)
+                {
+                    gabby.GettingBored();
+                }
 
             }
 
             while (perpetualMenu == true);  // ends do-while loop for program running until "exit"
 
-        }
+     
 
+        Console.WriteLine("Sorry Gabby, I have to go to work / out with friends now...See you soon!");
 
     }
     }
 
+}
