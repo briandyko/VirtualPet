@@ -16,6 +16,7 @@ namespace VirtualPet
         private int thirst;
         private int boredom;
         private int tiredness;
+        private bool needsBathroom;
         private bool isSick;
 
         //Properties
@@ -56,6 +57,12 @@ namespace VirtualPet
             set { this.tiredness = value; }
         }
 
+        public bool NeedsBathroom
+        {
+            get { return this.needsBathroom; }
+            set { this.needsBathroom = value; }
+        }
+
         public bool IsSick
         {
             get { return this.isSick; }
@@ -83,48 +90,51 @@ namespace VirtualPet
 
         public void Feed()
         {
+            Console.WriteLine("\nYou feed Gabby.\n");
             hunger -= 5;
-        }
-
-        public void WeightGain()
-        {
-            if (hunger < 0 || boredom > 10 || tiredness < 0)
-            {
-                weight += 2;
-            }
+            thirst++;
         }
 
         public void Drink()
         {
+            Console.WriteLine("\nYou give Gabby some water.\n");
             thirst -= 5;
         }
 
         public void Sleep()
         {
+            Console.WriteLine("\nYou sing Gabby peacefully to sleep.\n");
             tiredness -= 5;
-            if (tiredness < 0)
-            {
-                tiredness = 0;
-            }
         }
 
         public void Play()
         {
-            boredom -= 5;
-            hunger += 5;
-            thirst += 8;
+            Console.WriteLine("\nYou use the laser pointer and Gabby runs around the room after it.\n");
+            boredom -= 2;
+            hunger += 2;
+            thirst += 3;
             tiredness += 3;
+            weight--;
 
-            if (weight > 20)
+        }
+
+        public void WeightGain()
+        {
+            if (hunger > 30 || boredom > 30)
             {
-                weight--;
+                weight += 2;
             }
+        }
 
+        public void Bored()
+        {
+            Console.WriteLine("\nWhy don't you ever want to do anything? Gabby is bored.\n");
+            boredom += 3;
         }
 
         public void GettingHungry()
         {
-            if (hunger > 30)
+            if (hunger > 30 && hunger < 40)
             {
                 Console.WriteLine(name + " is getting hungry, you better feed her!");
             }
@@ -133,28 +143,34 @@ namespace VirtualPet
 
         public void GettingThirsty()
         {
-            if (thirst > 30)
+            if (thirst > 30 && hunger < 40)
             {
-                Console.WriteLine(name + "is getting very thirsty, maybe give her some water.");
+                Console.WriteLine(name + " is getting very thirsty, maybe give her some water.");
             }
         }
 
         public void GettingTired()
         {
-            if (tiredness > 20)
+            if (tiredness > 25)
             {
-                Console.WriteLine(name + "is looking tired, let her take a nap.");
+                Console.WriteLine(name + " is looking tired, let her take a nap.");
             }
         }
 
-        public void GettingBored()
+
+        public void Relief()
         {
-            boredom += 3;
+            if (thirst < 15)
+            {
+                needsBathroom = true;
+                Console.WriteLine("Gabby needs you to open the door so she can get to her litter box.");
+                thirst = 20;
+            }
         }
 
         public void Sick()
         {
-            if (hunger > 32 || thirst > 32 || tiredness > 22)
+            if (hunger >= 40 && hunger < 50 || thirst >= 40 && thirst < 50 || tiredness >= 35 && tiredness < 45 || weight >= 13 && weight < 16)
             {
                 isSick = true;
                 if (isSick == true)
@@ -166,9 +182,9 @@ namespace VirtualPet
 
         public void Perish()
         {
-            if (hunger >= 40 || thirst >= 40 || tiredness >= 30)
+            if (hunger >= 50 || thirst >= 50 || tiredness >= 45 || weight > 16)
             {
-                Console.WriteLine("Sadly, " + name + "has perished. You are not a very good pet owner.");
+                Console.WriteLine("Sadly, " + name + " has perished. You are not a very good pet owner.");
             }
 
         }

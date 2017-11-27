@@ -12,11 +12,11 @@ namespace VirtualPet
         {
             VirtualPet gabby = new VirtualPet();
             gabby.Name = "Gabby the Cat";
-            gabby.Weight = 15;
-            gabby.Hunger = 25;
-            gabby.Thirst = 25;
-            gabby.Boredom = 0;
-            gabby.Tiredness = 0;
+            gabby.Weight = 8;
+            gabby.Hunger = 20;
+            gabby.Thirst = 20;
+            gabby.Boredom = 20;
+            gabby.Tiredness = 20;
             gabby.IsSick = false;
 
             bool perpetualMenu = true;
@@ -29,8 +29,16 @@ namespace VirtualPet
 
                 gabby.Tick();
                 Console.WriteLine();
+                gabby.GettingHungry();
+                gabby.GettingThirsty();
+                gabby.WeightGain();
+                gabby.GettingTired();
+                gabby.Sick();
+                gabby.Relief();
+                gabby.Perish();
+                Console.WriteLine();
 
-                Console.WriteLine("Now that you are the proud owner of " + gabby.Name + " What do you want to do?");
+                Console.WriteLine("What do you want to do?");
                 Console.WriteLine("1. Feed Gabby");
                 Console.WriteLine("2. Give Gabby Water");
                 Console.WriteLine("3. Play with Gabby");
@@ -47,7 +55,6 @@ namespace VirtualPet
                 if(userChoice == 1)
                 {
                     gabby.Feed();
-                    gabby.WeightGain();
                 }
 
                 else if(userChoice == 2)
@@ -67,7 +74,7 @@ namespace VirtualPet
 
                 else if (userChoice == 5)
                 {
-                    gabby.GettingBored();
+                    gabby.Bored();
                 }
 
             }
