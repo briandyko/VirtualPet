@@ -27,6 +27,7 @@ namespace VirtualPet
 
         public override void Play()
         {
+            Console.WriteLine("You dangle some fake flies over {0}'s cage and {0} chases after it", Name);
             base.Play();
             if (thirst >= 30)
             {

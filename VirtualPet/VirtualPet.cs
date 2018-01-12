@@ -16,11 +16,13 @@ namespace VirtualPet
         protected int tiredness;
         private bool needsBathroom;
         private bool isSick;
+        protected bool perpetualMenu = true;
 
         //Properties
 
         public string Name { get; set; }
         public int Hunger { get; set; }
+        public object Pet { get; set; }
 
         public int Weight
         {
@@ -104,7 +106,6 @@ namespace VirtualPet
 
         public virtual void Play()
         {
-            Console.WriteLine("\nYou use the laser pointer and your pet runs around the room after it.\n");
             boredom -= 2;
             Hunger += 2;
             thirst += 3;
@@ -177,6 +178,70 @@ namespace VirtualPet
                 Console.WriteLine("Sadly, " + Name + " has perished. You are not a very good pet owner.");
             }
 
+        }
+
+        public void Menu()
+        {
+            do { 
+            
+            Tick();
+
+            Console.WriteLine("What do you want to do?");
+            Console.WriteLine("1. Feed Your Pet");
+            Console.WriteLine("2. Give Your Pet Water");
+            Console.WriteLine("3. Play with Your Pet");
+            Console.WriteLine("4. Put Your Pet to Sleep");
+            Console.WriteLine("5. Do Nothing");
+            Console.WriteLine("6. Exit");
+            int userChoice = int.Parse(Console.ReadLine());
+
+            if (userChoice == 6)
+            {
+                perpetualMenu = false;    // to make do-while loop run
+            }
+
+            if (userChoice == 1)
+            {
+                Feed();
+
+            }
+
+            else if (userChoice == 2)
+            {
+                Drink();
+            }
+
+            else if (userChoice == 3)
+            {
+                Play();
+            }
+
+            else if (userChoice == 4)
+            {
+                Sleep();
+            }
+
+            else if (userChoice == 5)
+            {
+                Bored();
+            }
+
+        }
+
+            while (perpetualMenu == true);
+
+            Console.WriteLine("Sorry {0}, I have to go to work / out with friends now...See you soon!", Name);
+        }
+
+        public void Activate()
+        {
+            Bored();
+            GettingHungry();
+            GettingThirsty();
+            GettingTired();
+            Relief();
+            Sick();
+            Perish();
         }
     }
 

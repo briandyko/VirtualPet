@@ -28,6 +28,7 @@ namespace VirtualPet
 
         public override void Play()
         {
+            Console.WriteLine("Sorry {0}, I have to go to work / out with friends now...See you soon!", Name);
             if (HasCatnip == false)
             {
                 base.Play();
