@@ -10,7 +10,7 @@ namespace VirtualPet
     {
         //fields
 
-        private int weight;
+        protected int weight;
         protected int thirst;
         private int boredom;
         protected int tiredness;
@@ -67,40 +67,24 @@ namespace VirtualPet
             this.Name = Name;
         }
 
-        public VirtualPet(string Name, int weight)
-        {
-            this.Name = Name;
-            this.Weight = weight;
-        }
-
         //Methods
-
-        public void Tick()
-        {
-            Console.WriteLine(Name);
-            Console.WriteLine("Hunger: " + Hunger);
-            Console.WriteLine("Weight: " + weight);
-            Console.WriteLine("Thirst: " + thirst);
-            Console.WriteLine("Boredom: " + boredom);
-            Console.WriteLine("Tiredness: " + tiredness);
-        }
 
         public void Feed()
         {
-            Console.WriteLine("\nYou feed your Pet.\n");
+            Console.WriteLine("You feed {0}", Name);
             Hunger -= 5;
             thirst++;
         }
 
         public void Drink()
         {
-            Console.WriteLine("\nYou give " + Name + " some water.\n");
+            Console.WriteLine("You give {0} some water", Name);
             thirst -= 5;
         }
 
         public void Sleep()
         {
-            Console.WriteLine("\nYou sing {0} peacefully to sleep.\n", Name);
+            Console.WriteLine("You sing {0} peacefully to sleep.", Name);
             tiredness -= 5;
         }
 
@@ -115,11 +99,13 @@ namespace VirtualPet
         }
 
         abstract public void WeightGain();
+
+        abstract public void Perish();
       
 
         public void Bored()
         {
-            Console.WriteLine("\nWhy don't you ever want to do anything? {0) is bored.\n", Name);
+            //Console.WriteLine("\nWhy don't you ever want to do anything? {0) is bored.\n", Name);
             boredom += 3;
         }
 
@@ -151,11 +137,10 @@ namespace VirtualPet
 
         public void Relief()
         {
-            if (thirst < 15)
+            if (thirst > 25)
             {
                 needsBathroom = true;
                 Console.WriteLine("Gabby needs you to open the door so she can get to her litter box.");
-                thirst = 20;
             }
         }
 
@@ -171,14 +156,6 @@ namespace VirtualPet
             }
         }
 
-        public void Perish()
-        {
-            if (Hunger >= 50 || thirst >= 50 || tiredness >= 45 || weight > 16)
-            {
-                Console.WriteLine("Sadly, " + Name + " has perished. You are not a very good pet owner.");
-            }
-
-        }
 
         public void Menu()
         {
@@ -235,13 +212,25 @@ namespace VirtualPet
 
         public void Activate()
         {
-            Bored();
+            WeightGain();
             GettingHungry();
             GettingThirsty();
             GettingTired();
             Relief();
             Sick();
             Perish();
+        }
+
+        public void Tick()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Hunger: " + Hunger);
+            Console.WriteLine("Weight: " + weight);
+            Console.WriteLine("Thirst: " + thirst);
+            Console.WriteLine("Boredom: " + boredom);
+            Console.WriteLine("Tiredness: " + tiredness);
+            Activate();
+            Console.WriteLine();
         }
     }
 

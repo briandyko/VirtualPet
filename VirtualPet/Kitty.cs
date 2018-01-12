@@ -12,15 +12,17 @@ namespace VirtualPet
         protected bool HasCatnip { get; set; }
 
 
-    public Kitty(bool HasCatnip) : base("Gabby", 22)
+    public Kitty(bool HasCatnip) : base("Gabby")
     {
             this.HasCatnip = HasCatnip;
+            weight = 22;
+            Thirst = 5;
+            Hunger = 8;
     }
-
 
     public override void WeightGain()
     {
-        if (tiredness > 20)
+        if (tiredness > 20 || Boredom > 10)
         {
             Weight += 3;
         }
@@ -28,7 +30,6 @@ namespace VirtualPet
 
         public override void Play()
         {
-            Console.WriteLine("Sorry {0}, I have to go to work / out with friends now...See you soon!", Name);
             if (HasCatnip == false)
             {
                 base.Play();
@@ -40,6 +41,16 @@ namespace VirtualPet
                 Hunger += 9;
                 Thirst += 10;
             }
+        }
+
+        public override void Perish()
+        {
+            if (Hunger >= 30 || thirst >= 30 || tiredness >= 45 || Weight > 40)
+            {
+                Console.WriteLine("Sadly, " + Name + " has perished. You are not a very good pet owner.");
+                Environment.Exit(0);
+            }
+
         }
     }
 }

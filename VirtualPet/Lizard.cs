@@ -15,11 +15,14 @@ namespace VirtualPet
         public Lizard(int Scales) : base("Lizzie")
         {
             this.Scales = Scales;
+            Weight = 7;
+            Thirst = 15;
+            Hunger = 10;
         }
 
         public override void WeightGain()
         {
-            if (Hunger > 20)
+            if (Hunger > 20 || Boredom > 30)
             {
                 Weight += 2;
             }
@@ -39,6 +42,15 @@ namespace VirtualPet
                 }
         }
 
+        public override void Perish()
+        {
+            if (Hunger >= 30 || thirst >= 50 || tiredness >= 45 || Weight > 16)
+            {
+                Console.WriteLine("Sadly, " + Name + " has perished. You are not a very good pet owner.");
+                Environment.Exit(0);
+            }
+
+        }
+    }
 
     }
-}
