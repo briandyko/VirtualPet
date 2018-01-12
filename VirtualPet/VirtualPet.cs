@@ -15,14 +15,13 @@ namespace VirtualPet
         private int boredom;
         protected int tiredness;
         private bool needsBathroom;
-        private bool isSick;
+        protected bool isSick;
         protected bool perpetualMenu = true;
 
         //Properties
 
         public string Name { get; set; }
         public int Hunger { get; set; }
-        public object Pet { get; set; }
 
         public int Weight
         {
@@ -67,19 +66,19 @@ namespace VirtualPet
             this.Name = Name;
         }
 
-        //Methods
+        //Methods - Action Methods
 
         public void Feed()
         {
             Console.WriteLine("You feed {0}", Name);
-            Hunger -= 5;
+            Hunger -= 3;
             thirst++;
         }
 
         public void Drink()
         {
             Console.WriteLine("You give {0} some water", Name);
-            thirst -= 5;
+            thirst -= 2;
         }
 
         public void Sleep()
@@ -95,13 +94,7 @@ namespace VirtualPet
             thirst += 3;
             tiredness += 3;
             weight--;
-
         }
-
-        abstract public void WeightGain();
-
-        abstract public void Perish();
-      
 
         public void Bored()
         {
@@ -109,22 +102,17 @@ namespace VirtualPet
             boredom += 3;
         }
 
-        public void GettingHungry()
-        {
-            if (Hunger > 30 && Hunger < 40)
-            {
-                Console.WriteLine(Name + " is getting hungry, you better feed her!");
-            }
-            
-        }
+        //Methods - Status Methods
 
-        public void GettingThirsty()
-        {
-            if (thirst > 30 && Hunger < 40)
-            {
-                Console.WriteLine(Name + " is getting very thirsty, maybe give her some water.");
-            }
-        }
+        abstract public void WeightGain();
+
+        abstract public void Perish();
+
+        abstract public void GettingHungry();
+
+        abstract public void GettingThirsty();
+
+        abstract public void Sick();
 
         public void GettingTired()
         {
@@ -134,29 +122,19 @@ namespace VirtualPet
             }
         }
 
-
         public void Relief()
         {
-            if (thirst > 25)
+            if (thirst < 15)
             {
                 needsBathroom = true;
                 Console.WriteLine("Gabby needs you to open the door so she can get to her litter box.");
+                thirst += 2;
             }
         }
 
-        public void Sick()
-        {
-            if (Hunger >= 40 && Hunger < 50 || thirst >= 40 && thirst < 50 || tiredness >= 35 && tiredness < 45 || weight >= 13 && weight < 16)
-            {
-                isSick = true;
-                if (isSick == true)
-                {
-                    Console.WriteLine("Oh no! " + Name + " is sick! You need to take better care of her.");
-                }
-            }
-        }
-
-
+        
+      //Methods - 
+           
         public void Menu()
         {
             do { 
