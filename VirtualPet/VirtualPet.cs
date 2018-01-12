@@ -6,37 +6,26 @@ using System.Threading.Tasks;
 
 namespace VirtualPet
 {
-    class VirtualPet
+    abstract class VirtualPet
     {
         //fields
 
-        private string name;
         private int weight;
-        private int hunger;
-        private int thirst;
+        protected int thirst;
         private int boredom;
-        private int tiredness;
+        protected int tiredness;
         private bool needsBathroom;
         private bool isSick;
 
         //Properties
 
-        public string Name
-        {
-            get { return this.name; }
-            set { this.name = value; }
-        }
+        public string Name { get; set; }
+        public int Hunger { get; set; }
 
         public int Weight
         {
             get { return this.weight; }
             set { this.weight = value; }
-        }
-
-        public int Hunger
-        {
-            get { return this.hunger; }
-            set { this.hunger = value; }
         }
 
         public int Thirst
@@ -71,17 +60,23 @@ namespace VirtualPet
 
         //Constructors
 
-        public VirtualPet()
+        public VirtualPet(string Name)
         {
+            this.Name = Name;
+        }
 
+        public VirtualPet(string Name, int weight)
+        {
+            this.Name = Name;
+            this.Weight = weight;
         }
 
         //Methods
 
         public void Tick()
         {
-            Console.WriteLine(name);
-            Console.WriteLine("Hunger: " + hunger);
+            Console.WriteLine(Name);
+            Console.WriteLine("Hunger: " + Hunger);
             Console.WriteLine("Weight: " + weight);
             Console.WriteLine("Thirst: " + thirst);
             Console.WriteLine("Boredom: " + boredom);
@@ -90,62 +85,57 @@ namespace VirtualPet
 
         public void Feed()
         {
-            Console.WriteLine("\nYou feed Gabby.\n");
-            hunger -= 5;
+            Console.WriteLine("\nYou feed your Pet.\n");
+            Hunger -= 5;
             thirst++;
         }
 
         public void Drink()
         {
-            Console.WriteLine("\nYou give Gabby some water.\n");
+            Console.WriteLine("\nYou give " + Name + " some water.\n");
             thirst -= 5;
         }
 
         public void Sleep()
         {
-            Console.WriteLine("\nYou sing Gabby peacefully to sleep.\n");
+            Console.WriteLine("\nYou sing {0} peacefully to sleep.\n", Name);
             tiredness -= 5;
         }
 
-        public void Play()
+        public virtual void Play()
         {
-            Console.WriteLine("\nYou use the laser pointer and Gabby runs around the room after it.\n");
+            Console.WriteLine("\nYou use the laser pointer and your pet runs around the room after it.\n");
             boredom -= 2;
-            hunger += 2;
+            Hunger += 2;
             thirst += 3;
             tiredness += 3;
             weight--;
 
         }
 
-        public void WeightGain()
-        {
-            if (hunger > 30 || boredom > 30)
-            {
-                weight += 2;
-            }
-        }
+        abstract public void WeightGain();
+      
 
         public void Bored()
         {
-            Console.WriteLine("\nWhy don't you ever want to do anything? Gabby is bored.\n");
+            Console.WriteLine("\nWhy don't you ever want to do anything? {0) is bored.\n", Name);
             boredom += 3;
         }
 
         public void GettingHungry()
         {
-            if (hunger > 30 && hunger < 40)
+            if (Hunger > 30 && Hunger < 40)
             {
-                Console.WriteLine(name + " is getting hungry, you better feed her!");
+                Console.WriteLine(Name + " is getting hungry, you better feed her!");
             }
             
         }
 
         public void GettingThirsty()
         {
-            if (thirst > 30 && hunger < 40)
+            if (thirst > 30 && Hunger < 40)
             {
-                Console.WriteLine(name + " is getting very thirsty, maybe give her some water.");
+                Console.WriteLine(Name + " is getting very thirsty, maybe give her some water.");
             }
         }
 
@@ -153,7 +143,7 @@ namespace VirtualPet
         {
             if (tiredness > 25)
             {
-                Console.WriteLine(name + " is looking tired, let her take a nap.");
+                Console.WriteLine(Name + " is looking tired, let her take a nap.");
             }
         }
 
@@ -170,21 +160,21 @@ namespace VirtualPet
 
         public void Sick()
         {
-            if (hunger >= 40 && hunger < 50 || thirst >= 40 && thirst < 50 || tiredness >= 35 && tiredness < 45 || weight >= 13 && weight < 16)
+            if (Hunger >= 40 && Hunger < 50 || thirst >= 40 && thirst < 50 || tiredness >= 35 && tiredness < 45 || weight >= 13 && weight < 16)
             {
                 isSick = true;
                 if (isSick == true)
                 {
-                    Console.WriteLine("Oh no! " + name + " is sick! You need to take better care of her.");
+                    Console.WriteLine("Oh no! " + Name + " is sick! You need to take better care of her.");
                 }
             }
         }
 
         public void Perish()
         {
-            if (hunger >= 50 || thirst >= 50 || tiredness >= 45 || weight > 16)
+            if (Hunger >= 50 || thirst >= 50 || tiredness >= 45 || weight > 16)
             {
-                Console.WriteLine("Sadly, " + name + " has perished. You are not a very good pet owner.");
+                Console.WriteLine("Sadly, " + Name + " has perished. You are not a very good pet owner.");
             }
 
         }

@@ -10,39 +10,26 @@ namespace VirtualPet
     {
         static void Main(string[] args)
         {
-            VirtualPet gabby = new VirtualPet();
-            gabby.Name = "Gabby the Cat";
-            gabby.Weight = 8;
-            gabby.Hunger = 20;
-            gabby.Thirst = 20;
-            gabby.Boredom = 20;
-            gabby.Tiredness = 20;
-            gabby.IsSick = false;
 
+            Lizard lizzie = new Lizard(2000);
+
+            Kitty gabby = new Kitty(true);
+
+        
             bool perpetualMenu = true;
-
-            
 
             do
             {
                 // User Menu
 
-                gabby.Tick();
-                Console.WriteLine();
-                gabby.GettingHungry();
-                gabby.GettingThirsty();
-                gabby.WeightGain();
-                gabby.GettingTired();
-                gabby.Sick();
-                gabby.Relief();
-                gabby.Perish();
-                Console.WriteLine();
+                lizzie.Tick();
+                Console.WriteLine(gabby.Name + " " + gabby.Weight);
 
                 Console.WriteLine("What do you want to do?");
-                Console.WriteLine("1. Feed Gabby");
-                Console.WriteLine("2. Give Gabby Water");
-                Console.WriteLine("3. Play with Gabby");
-                Console.WriteLine("4. Put Gabby to Sleep");
+                Console.WriteLine("1. Feed Your Pet");
+                Console.WriteLine("2. Give Your Pet Water");
+                Console.WriteLine("3. Play with Your Pet");
+                Console.WriteLine("4. Put Your Pet to Sleep");
                 Console.WriteLine("5. Do Nothing");
                 Console.WriteLine("6. Exit");
                 int userChoice = int.Parse(Console.ReadLine());
@@ -54,27 +41,28 @@ namespace VirtualPet
 
                 if(userChoice == 1)
                 {
-                    gabby.Feed();
+                    lizzie.Feed();
+                    
                 }
 
                 else if(userChoice == 2)
                 {
-                    gabby.Drink();
+                    lizzie.Drink();
                 }
 
                 else if (userChoice == 3)
                 {
-                    gabby.Play();
+                    lizzie.Play();
                 }
 
                 else if (userChoice == 4)
                 {
-                    gabby.Sleep();
+                    lizzie.Sleep();
                 }
 
                 else if (userChoice == 5)
                 {
-                    gabby.Bored();
+                    lizzie.Bored();
                 }
 
             }
